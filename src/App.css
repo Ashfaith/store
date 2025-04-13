@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.header {
+  width: 100vw;
+  max-height: 1rem;
+  background: blue;
+  display: flex;
+}
+
+.product-grid {
+  width: 100vw;
+}
+
+.tile {
+  width: 3rem;
+  height: 5rem;
+}
