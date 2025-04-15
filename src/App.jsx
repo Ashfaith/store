@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom";
 import "./App.css";
-import { useParams } from "react-router-dom";
-import Header from "./utils/Header";
+import { Routes, Route } from "react-router-dom";
+import Header from "./pages/Header";
+import Home from "./pages/Home";
+import Store from "./pages/Store";
 
 function App() {
   return (
-    <>
-      <Header />
-      <p>This is the home / landing page</p>
-      <Link to="/store">Checkout store</Link>
-    </>
+    <Routes>
+      <Route path="/" element={<Header />}>
+        <Route index element={<Home />} />
+        <Route path="store" element={<Store />} />
+      </Route>
+    </Routes>
   );
 }
 
