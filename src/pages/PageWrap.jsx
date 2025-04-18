@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import { Outlet } from "react-router";
+import { Container } from "@mantine/core";
+
 const Header = () => {
   return (
-    <div className="body">
+    <Container fluid>
       <div className="header">
         <div>
           <Link to="/">Home</Link>
@@ -18,7 +20,7 @@ const Header = () => {
       <main>
         <Outlet />
       </main>
-    </div>
+    </Container>
   );
 };
 
