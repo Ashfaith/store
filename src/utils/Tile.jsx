@@ -1,16 +1,36 @@
-import { Card, Image, Text, Button, Flex, Box } from "@mantine/core";
+import {
+  Card,
+  Image,
+  Text,
+  Button,
+  Flex,
+  Box,
+  useMantineTheme,
+} from "@mantine/core";
 
 const Tile = ({ product, addItems }) => {
   const handleAddClick = () => {
     addItems(product);
   };
 
+  const checkTitleLength = (title) => {
+    const originalStr = title;
+    const strToArr = originalStr.split(" ");
+    let shortenedStr = originalStr;
+    if (strToArr.length > 5) {
+      shortenedStr = strToArr.slice(0, 5).join(" ") + "...";
+    }
+    return shortenedStr;
+  };
+
+  const theme = useMantineTheme();
+
   return (
     <Flex direction="column">
       <Card
         shadow="sm"
         padding={0}
-        radius="md"
+        radius="sm"
         withBorder
         style={{ width: 400, height: 425 }}
       >
@@ -22,7 +42,7 @@ const Tile = ({ product, addItems }) => {
             fit="contain"
           />
         </Card.Section>
-        <Box mt="auto" bg="grey">
+        <Box mt="auto" style={{ backgroundColor: theme.colors.gray[1] }}>
           <Flex h="100%">
             <Flex direction="column" h="100%">
               <Text
@@ -33,7 +53,7 @@ const Tile = ({ product, addItems }) => {
                 ml={8}
                 mt={5}
               >
-                {product.title}
+                {checkTitleLength(product.title)}
               </Text>
               <Text
                 weight={1000}
@@ -50,7 +70,11 @@ const Tile = ({ product, addItems }) => {
             <Button
               h="100%"
               mt="auto"
-              style={{ marginLeft: "auto" }}
+              radius="xs"
+              style={{
+                marginLeft: "auto",
+                backgroundColor: theme.colors.gray[5],
+              }}
               onClick={handleAddClick}
             >
               +

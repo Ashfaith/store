@@ -2,11 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import "@mantine/core/styles.css";
-import {
-  ColorSchemeScript,
-  MantineProvider,
-  mantineHtmlProps,
-} from "@mantine/core";
+import { MantineProvider, useMantineTheme } from "@mantine/core";
 import Header from "./pages/PageWrap";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
