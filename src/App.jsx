@@ -2,10 +2,10 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import "@mantine/core/styles.css";
-import { MantineProvider, useMantineTheme } from "@mantine/core";
-import Header from "./pages/PageWrap";
+import { MantineProvider } from "@mantine/core";
+import Wrapper from "./pages/PageWrap/PageWrap";
 import Home from "./pages/Home";
-import Store from "./pages/Store";
+import Store from "./pages/Store/Store";
 import Cart from "./utils/Cart";
 
 function App() {
@@ -13,9 +13,13 @@ function App() {
 
   return (
     <MantineProvider>
-      <Routes>
+      <Routes
+        theme={{
+          fontFamily: "Helvetica",
+        }}
+      >
         {/* prettier-ignore */}
-        <Route path="/" element={<><Header /><Cart cartItems={cartItems}/></>}>
+        <Route path="/" element={<><Wrapper /><Cart cartItems={cartItems}/></>}>
           <Route index element={<Home />} />
           <Route path="store" element={<Store setCartItems={setCartItems} />}/>
         </Route>

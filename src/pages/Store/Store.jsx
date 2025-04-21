@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import Tile from "../utils/Tile";
+import Tile from "../../utils/Tile";
 console.log("Tile component:", Tile);
 import { useState, useEffect } from "react";
 import { Container, Grid, Skeleton, Flex, Center } from "@mantine/core";
+import styles from "./Store.module.css";
 
 const Store = ({ setCartItems }) => {
   const [items, setItems] = useState([]);
@@ -37,7 +38,9 @@ const Store = ({ setCartItems }) => {
 
   return (
     <>
-      <h2>All Products</h2>
+      <div href="#" className={styles.productHeadingCont}>
+        <h1>All Products</h1>
+      </div>
       <Container size="xl">
         <Grid>{tileContent}</Grid>
         <Link to="/">Home</Link>
