@@ -1,10 +1,14 @@
 import { Link } from "react-router";
 import { Outlet } from "react-router";
-import { Container, Autocomplete, Flex, Center } from "@mantine/core";
+import { Container, Autocomplete, Flex, Center, Button } from "@mantine/core";
 import styles from "./PageWrap.module.css";
 import { IconSearch } from "@tabler/icons-react";
 
-const Wrapper = () => {
+const Wrapper = ({ setOpen }) => {
+  const handleOpenClick = () => {
+    setOpen(true);
+  };
+
   return (
     <Container m={0} p={0} fluid>
       <Center href="#" className={styles.header}>
@@ -28,6 +32,10 @@ const Wrapper = () => {
               </Link>
             </div>
           </Flex>
+
+          <Button variant="default" onClick={handleOpenClick}>
+            Cart
+          </Button>
 
           <Autocomplete
             mt={22}

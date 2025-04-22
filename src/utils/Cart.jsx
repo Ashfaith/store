@@ -1,12 +1,16 @@
 import CartTile from "./cartTile";
-const Cart = ({ cartItems }) => {
+import { Drawer } from "@mantine/core";
+
+const Cart = ({ cartItems, open, setOpen }) => {
   return (
-    <div className="cart">
-      <h2>CART</h2>
-      {cartItems.map((cartItem) => {
-        return <CartTile product={cartItem} />;
-      })}
-    </div>
+    <>
+      <Drawer opened={open} onClose={() => setOpen(false)}>
+        <h2>CART</h2>
+        {cartItems.map((cartItem) => {
+          return <CartTile product={cartItem} />;
+        })}
+      </Drawer>
+    </>
   );
 };
 

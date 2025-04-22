@@ -24,8 +24,8 @@ const Store = ({ setCartItems }) => {
     items.length === 0
       ? /* prettier-ignore */
         Array.from({ length: 6 }).map((_, index) => (
-          <Grid.Col span={{ base: 12, xs: 4, lg: 3}}>
-            <Skeleton height={140} radius="md" animate={false} />
+          <Grid.Col span={4}>
+            <Skeleton w={400} h={425} radius="md" animate={false} />
           </Grid.Col>
         ))
       : items.map((item) => (

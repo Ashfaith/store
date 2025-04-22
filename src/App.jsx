@@ -10,6 +10,7 @@ import Cart from "./utils/Cart";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [open, setOpen] = useState(false);
 
   return (
     <MantineProvider>
@@ -19,7 +20,7 @@ function App() {
         }}
       >
         {/* prettier-ignore */}
-        <Route path="/" element={<><Wrapper /><Cart cartItems={cartItems}/></>}>
+        <Route path="/" element={<><Wrapper setOpen={setOpen} /><Cart open={open} setOpen={setOpen} cartItems={cartItems}/></>}>
           <Route index element={<Home />} />
           <Route path="store" element={<Store setCartItems={setCartItems} />}/>
         </Route>
