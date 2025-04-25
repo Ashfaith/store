@@ -1,14 +1,14 @@
 import { Link } from "react-router";
 import { Outlet } from "react-router";
-import { Container, Autocomplete, Flex, Center, Button } from "@mantine/core";
+import { Container, Autocomplete, Flex, Center } from "@mantine/core";
 import styles from "./PageWrap.module.css";
-import { IconSearch } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconShoppingCart,
+  IconShoppingCartFilled,
+} from "@tabler/icons-react";
 
-const Wrapper = ({ setOpen }) => {
-  const handleOpenClick = () => {
-    setOpen(true);
-  };
-
+const Wrapper = ({ open, cartItems }) => {
   return (
     <Container m={0} p={0} fluid>
       <Center href="#" className={styles.header}>
@@ -33,10 +33,6 @@ const Wrapper = ({ setOpen }) => {
             </div>
           </Flex>
 
-          <Button variant="default" onClick={handleOpenClick}>
-            Cart
-          </Button>
-
           <Autocomplete
             mt={22}
             mr="xl"
@@ -46,6 +42,18 @@ const Wrapper = ({ setOpen }) => {
             rightSection={<IconSearch stroke={2} style={{ color: "black" }} />}
           />
         </Flex>
+
+        {cartItems.length === 0 ? (
+          <IconShoppingCart onClick={open} className={styles.cart} />
+        ) : (
+          <div onClick={open} className={styles.cartIconCont}>
+            <IconShoppingCartFilled
+              style={{ position: "relative", zIndex: "1" }}
+              className={styles.cart}
+            />
+            <h3 className={styles.cartItemCount}>{cartItems.length}</h3>
+          </div>
+        )}
       </Center>
 
       <main>

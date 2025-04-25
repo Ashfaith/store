@@ -17,8 +17,8 @@ const Tile = ({ product, addItems }) => {
     const originalStr = title;
     const strToArr = originalStr.split(" ");
     let shortenedStr = originalStr;
-    if (strToArr.length > 5) {
-      shortenedStr = strToArr.slice(0, 5).join(" ") + "...";
+    if (strToArr.length > 4) {
+      shortenedStr = strToArr.slice(0, 4).join(" ") + "...";
     }
     return shortenedStr;
   };
@@ -45,25 +45,11 @@ const Tile = ({ product, addItems }) => {
         <Box mt="auto" style={{ backgroundColor: theme.colors.gray[1] }}>
           <Flex h="100%">
             <Flex direction="column" h="100%">
-              <Text
-                weight={1000}
-                size="md"
-                lineClamp={2}
-                ta="left"
-                ml={8}
-                mt={5}
-              >
+              <Text fw={1000} size="md" lineClamp={2} ta="left" ml={8} mt={5}>
                 {checkTitleLength(product.title)}
               </Text>
-              <Text
-                weight={1000}
-                size="md"
-                lineClamp={2}
-                ta="left"
-                ml={8}
-                mb={5}
-              >
-                {product.price}
+              <Text fw={1000} size="md" lineClamp={2} ta="left" ml={8} mb={5}>
+                ${product.price}
               </Text>
             </Flex>
 

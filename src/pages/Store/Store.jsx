@@ -11,8 +11,11 @@ const Store = ({ setCartItems }) => {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setItems(data);
+        const itemWithQuant = data.map((item) => ({
+          ...item,
+          quantity: 1,
+        }));
+        setItems(itemWithQuant);
       });
   }, []);
 
