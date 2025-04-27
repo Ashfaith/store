@@ -23,6 +23,10 @@ const Store = ({ setCartItems }) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
+  const viewProduct = (product) => {
+    setProductPage(product);
+  };
+
   const tileContent =
     items.length === 0
       ? /* prettier-ignore */

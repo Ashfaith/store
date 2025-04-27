@@ -1,6 +1,6 @@
 import { Button } from "@mantine/core";
 
-const CartTile = ({ product, onQuantityChange }) => {
+const CartTile = ({ product, onQuantityChange, onRemoveClick }) => {
   const imgSrc = product.image;
 
   return (
@@ -13,6 +13,7 @@ const CartTile = ({ product, onQuantityChange }) => {
       <div>
         <Button onClick={() => onQuantityChange("+")}>+</Button>
         <Button onClick={() => onQuantityChange("-")}>-</Button>
+        <Button onClick={() => onRemoveClick()}>X</Button>
       </div>
     </div>
   );

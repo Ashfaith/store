@@ -1,13 +1,18 @@
 import CartTile from "./CartTile";
-import { Drawer } from "@mantine/core";
+import { Drawer, Button } from "@mantine/core";
 
 const Cart = ({ cartItems, opened, onClose, setCartItems }) => {
-  const removeItem = (indexToRemove) =>
-    setCartItems((prevCart) => prevCart.filter((_, i) => i !== indexToRemove));
+  const clearCart = () => setCartItems([]);
+
+  const handleRemove = (indexToRemove) => {
+    setCartItems((currentCart) =>
+      currentCart.filter((_, i) => i !== indexToRemove)
+    );
+  };
 
   const handleQuantity = (index, operator) => {
-    setCartItems((prev) => {
-      const updatedCart = prev.map((item, i) => {
+    setCartItems((currentCart) => {
+      const updatedCart = currentCart.map((item, i) => {
         if (i === index) {
           let newQuantity =
             operator === "+" ? item.quantity + 1 : item.quantity - 1;
@@ -29,9 +34,11 @@ const Cart = ({ cartItems, opened, onClose, setCartItems }) => {
               onQuantityChange={(operator) => handleQuantity(index, operator)}
               key={index}
               product={cartItem}
+              onRemoveClick={() => handleRemove(index)}
             />
           );
         })}
+        <Button onClick={clearCart}>Clear Cart</Button>
       </Drawer>
     </>
   );
