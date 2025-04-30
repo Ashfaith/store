@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -14,12 +14,29 @@ import "@mantine/carousel/styles.css";
 export const ShopContext = createContext({
   productPageData: [],
   getProductData: () => {},
+  storeItems: [],
+  getStoreItems: () => {},
 });
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [productPageData, setProductPageData] = useState();
+  const [storeItems, setStoreItems] = useState([]);
+
+  const getStoreItems = () => {
+    useEffect(() => {
+      fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((data) => {
+          const itemWithQuant = data.map((item) => ({
+            ...item,
+            quantity: 1,
+          }));
+          setStoreItems(itemWithQuant);
+        });
+    }, []);
+  };
 
   const getProductData = (product) => {
     setProductPageData(product);
@@ -27,7 +44,9 @@ function App() {
 
   return (
     <MantineProvider>
-      <ShopContext.Provider value={{ productPageData, getProductData }}>
+      <ShopContext.Provider
+        value={{ productPageData, getProductData, getStoreItems, storeItems }}
+      >
         <Routes
           theme={{
             fontFamily: "Helvetica",

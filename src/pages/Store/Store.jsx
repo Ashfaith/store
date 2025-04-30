@@ -1,41 +1,28 @@
 import { Link } from "react-router-dom";
 import Tile from "../../utils/Tile";
-console.log("Tile component:", Tile);
-import { useState, useEffect } from "react";
 import { Container, Grid, Skeleton, Flex, Center } from "@mantine/core";
 import styles from "./Store.module.css";
+import { ShopContext } from "../../App";
+import { useContext } from "react";
 
 const Store = ({ setCartItems }) => {
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => {
-        const itemWithQuant = data.map((item) => ({
-          ...item,
-          quantity: 1,
-        }));
-        setItems(itemWithQuant);
-      });
-  }, []);
-
   const addItemsToCart = (product) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
-  const viewProduct = (product) => {
-    setProductPage(product);
-  };
+  const { getStoreItems, storeItems } = useContext(ShopContext);
+
+  getStoreItems();
 
   const tileContent =
-    items.length === 0
+    storeItems.length === 0
       ? /* prettier-ignore */
         Array.from({ length: 6 }).map((_, index) => (
           <Grid.Col span={4}>
             <Skeleton w={400} h={425} radius="md" animate={false} />
           </Grid.Col>
         ))
-      : items.map((item) => (
+      : storeItems.map((item) => (
           <Grid.Col span={4}>
             <Center>
               <Tile product={item} addItems={addItemsToCart} />

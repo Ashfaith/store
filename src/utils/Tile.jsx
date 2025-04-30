@@ -12,7 +12,7 @@ import { toUrlSlug } from "./helpers";
 import { useContext } from "react";
 import { ShopContext } from "../App";
 
-const Tile = ({ product, addItems, selectProduct }) => {
+const Tile = ({ product, addItems }) => {
   const handleAddClick = () => {
     addItems(product);
   };
