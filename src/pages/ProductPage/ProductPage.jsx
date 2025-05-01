@@ -1,21 +1,46 @@
 import { Carousel } from "@mantine/carousel";
-import { Container, Accordion } from "@mantine/core";
-import { useContext } from "react";
+import { Container, Accordion, Button } from "@mantine/core";
+import { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../App";
 import styles from "./ProductPage.module.css";
 
 const ProductPage = () => {
-  const { productPageData } = useContext(ShopContext);
-  console.log(productPageData);
+  const { storeItems, fetchProduct } = useContext(ShopContext);
+  const [pageUrl, setPageUrl] = useState("");
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    const slug = path.substring(path.lastIndexOf("/") + 1);
+    setPageUrl(slug);
+  }, []);
+
+  if (!pageUrl || storeItems.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  const currentItem = storeItems.find((item) => item.url === pageUrl);
+
+  const handleAddClick = () => {
+    fetchProduct(currentItem);
+  };
+
   return (
     <Container href="#" className={styles.container}>
-      <Carousel className={styles.carousel} withIndicators>
+      <Carousel
+        className={styles.carousel}
+        withIndicators
+        styles={{
+          viewport: {
+            maxWidth: "100%",
+            overflow: "hidden",
+          },
+          container: {
+            maxWidth: "100%",
+          },
+        }}
+      >
         <Carousel.Slide className={styles.slide}>
-          <img
-            className={styles.img}
-            src={productPageData.image}
-            alt="Product"
-          />
+          <img className={styles.img} src={currentItem.image} alt="Product" />
         </Carousel.Slide>
         <Carousel.Slide>
           <h1>ANOTHER COOL IMAGE</h1>
@@ -23,19 +48,28 @@ const ProductPage = () => {
       </Carousel>
 
       <div className={styles.infoCont}>
-        <span>{productPageData.title.toUpperCase()}</span>
-        <span>${productPageData.price}</span>
+        <span>{currentItem.title.toUpperCase()}</span>
+        <span>${currentItem.price}</span>
         <Accordion w="100%">
-          <Accordion.Item value={productPageData.id.toString()}>
+          <Accordion.Item value={currentItem.id.toString()}>
             <Accordion.Control className={styles.dropInfo}>
               <span>DESCRIPTION</span>
               {/* <span>+</span> */}
             </Accordion.Control>
             <Accordion.Panel className={styles.panel}>
-              {productPageData.description}
+              {currentItem.description}
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
+
+        <Button
+          h="100%"
+          mt="auto"
+          radius="xs"
+          onClick={console.log(currentItem)}
+        >
+          +
+        </Button>
       </div>
     </Container>
   );

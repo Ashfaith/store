@@ -10,9 +10,7 @@ const Store = ({ setCartItems }) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
-  const { getStoreItems, storeItems } = useContext(ShopContext);
-
-  getStoreItems();
+  const { storeItems } = useContext(ShopContext);
 
   const tileContent =
     storeItems.length === 0
@@ -37,7 +35,6 @@ const Store = ({ setCartItems }) => {
       </div>
       <Container size="xl">
         <Grid>{tileContent}</Grid>
-        <Link to="/">Home</Link>
       </Container>
     </>
   );

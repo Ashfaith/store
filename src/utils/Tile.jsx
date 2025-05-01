@@ -9,15 +9,11 @@ import {
 } from "@mantine/core";
 import { Link } from "react-router";
 import { toUrlSlug } from "./helpers";
-import { useContext } from "react";
-import { ShopContext } from "../App";
 
 const Tile = ({ product, addItems }) => {
   const handleAddClick = () => {
     addItems(product);
   };
-
-  const { getProductData } = useContext(ShopContext);
 
   const checkTitleLength = (title) => {
     const originalStr = title;
@@ -32,17 +28,17 @@ const Tile = ({ product, addItems }) => {
   const theme = useMantineTheme();
 
   return (
-    <Link
-      to={`/product-page/${toUrlSlug(product.title)}`}
-      onClick={() => getProductData(product)}
-    >
-      <Flex direction="column">
-        <Card
-          shadow="sm"
-          padding={0}
-          radius="sm"
-          withBorder
-          style={{ width: 400, height: 425 }}
+    <Flex direction="column">
+      <Card
+        shadow="sm"
+        padding={0}
+        radius="sm"
+        withBorder
+        style={{ width: 400, height: 425 }}
+      >
+        <Link
+          to={`/product-page/${toUrlSlug(product.url)}`}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
           <Card.Section mt={40}>
             <Image
@@ -62,24 +58,26 @@ const Tile = ({ product, addItems }) => {
                   ${product.price}
                 </Text>
               </Flex>
-
-              <Button
-                h="100%"
-                mt="auto"
-                radius="xs"
-                style={{
-                  marginLeft: "auto",
-                  backgroundColor: theme.colors.gray[5],
-                }}
-                onClick={handleAddClick}
-              >
-                +
-              </Button>
             </Flex>
           </Box>
-        </Card>
-      </Flex>
-    </Link>
+        </Link>
+
+        <Button
+          h="100%"
+          mt="auto"
+          radius="xs"
+          style={{
+            position: "absolute",
+            right: 10,
+            bottom: 10,
+            backgroundColor: theme.colors.gray[5],
+          }}
+          onClick={handleAddClick}
+        >
+          +
+        </Button>
+      </Card>
+    </Flex>
   );
 };
 

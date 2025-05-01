@@ -4,6 +4,7 @@ import { useState, createContext, useEffect } from "react";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { toUrlSlug } from "./utils/helpers";
 import Wrapper from "./pages/PageWrap/PageWrap";
 import Home from "./pages/Home";
 import Store from "./pages/Store/Store";
@@ -15,7 +16,8 @@ export const ShopContext = createContext({
   productPageData: [],
   getProductData: () => {},
   storeItems: [],
-  getStoreItems: () => {},
+  cartItems: [],
+  fetchProduct: () => {},
 });
 
 function App() {
@@ -24,28 +26,40 @@ function App() {
   const [productPageData, setProductPageData] = useState();
   const [storeItems, setStoreItems] = useState([]);
 
-  const getStoreItems = () => {
-    useEffect(() => {
+  useEffect(() => {
+    const getStoreItems = () => {
       fetch("https://fakestoreapi.com/products")
         .then((response) => response.json())
         .then((data) => {
           const itemWithQuant = data.map((item) => ({
             ...item,
             quantity: 1,
+            url: toUrlSlug(item.title),
           }));
           setStoreItems(itemWithQuant);
         });
-    }, []);
-  };
+    };
+    getStoreItems();
+  }, []);
 
   const getProductData = (product) => {
     setProductPageData(product);
   };
 
+  const fetchProduct = (product) => {
+    setCartItems([...cartItems, product]);
+  };
+
   return (
     <MantineProvider>
       <ShopContext.Provider
-        value={{ productPageData, getProductData, getStoreItems, storeItems }}
+        value={{
+          productPageData,
+          getProductData,
+          storeItems,
+          cartItems,
+          fetchProduct,
+        }}
       >
         <Routes
           theme={{
