@@ -2,6 +2,7 @@ import { Carousel } from "@mantine/carousel";
 import { Container, Accordion, Button } from "@mantine/core";
 import { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../../App";
+import { capitaliseFirstLetter } from "../../utils/helpers";
 import styles from "./ProductPage.module.css";
 
 const ProductPage = () => {
@@ -54,21 +55,15 @@ const ProductPage = () => {
           <Accordion.Item value={currentItem.id.toString()}>
             <Accordion.Control className={styles.dropInfo}>
               <span>DESCRIPTION</span>
-              {/* <span>+</span> */}
             </Accordion.Control>
             <Accordion.Panel className={styles.panel}>
-              {currentItem.description}
+              {capitaliseFirstLetter(currentItem.description)}
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
 
-        <Button
-          h="100%"
-          mt="auto"
-          radius="xs"
-          onClick={console.log(currentItem)}
-        >
-          +
+        <Button className={styles.button} onClick={handleAddClick}>
+          ADD TO CART
         </Button>
       </div>
     </Container>

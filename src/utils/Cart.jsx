@@ -25,22 +25,37 @@ const Cart = ({ cartItems, opened, onClose, setCartItems }) => {
   };
 
   return (
-    <>
-      <Drawer opened={opened} onClose={onClose} position="right">
+    <Drawer
+      opened={opened}
+      onClose={onClose}
+      position="right"
+      withCloseButton={false}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingBottom: "1rem",
+          borderBottom: "1px solid rgb(221, 221, 221)",
+          marginBottom: "1rem",
+        }}
+      >
         <h2>CART</h2>
-        {cartItems.map((cartItem, index) => {
-          return (
-            <CartTile
-              onQuantityChange={(operator) => handleQuantity(index, operator)}
-              key={index}
-              product={cartItem}
-              onRemoveClick={() => handleRemove(index)}
-            />
-          );
-        })}
         <Button onClick={clearCart}>Clear Cart</Button>
-      </Drawer>
-    </>
+      </div>
+      {cartItems.map((cartItem, index) => {
+        return (
+          <CartTile
+            onQuantityChange={(operator) => handleQuantity(index, operator)}
+            key={index}
+            product={cartItem}
+            onRemoveClick={() => handleRemove(index)}
+          />
+        );
+      })}
+    </Drawer>
   );
 };
 

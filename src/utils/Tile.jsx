@@ -8,22 +8,16 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { Link } from "react-router";
-import { toUrlSlug } from "./helpers";
+import { toUrlSlug, limitTitleLength } from "./helpers";
+import { useContext } from "react";
+import { ShopContext } from "../App";
 
 const Tile = ({ product, addItems }) => {
   const handleAddClick = () => {
     addItems(product);
   };
 
-  const checkTitleLength = (title) => {
-    const originalStr = title;
-    const strToArr = originalStr.split(" ");
-    let shortenedStr = originalStr;
-    if (strToArr.length > 4) {
-      shortenedStr = strToArr.slice(0, 4).join(" ") + "...";
-    }
-    return shortenedStr;
-  };
+  const { getProductData } = useContext(ShopContext);
 
   const theme = useMantineTheme();
 
@@ -38,7 +32,7 @@ const Tile = ({ product, addItems }) => {
       >
         <Link
           to={`/product-page/${toUrlSlug(product.url)}`}
-          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={() => getProductData(product)}
         >
           <Card.Section mt={40}>
             <Image
@@ -48,34 +42,37 @@ const Tile = ({ product, addItems }) => {
               fit="contain"
             />
           </Card.Section>
-          <Box mt="auto" style={{ backgroundColor: theme.colors.gray[1] }}>
-            <Flex h="100%">
-              <Flex direction="column" h="100%">
+        </Link>
+        <Box mt="auto" style={{ backgroundColor: theme.colors.gray[1] }}>
+          <Flex h="100%">
+            <Flex direction="column" h="100%">
+              <Link
+                to={`/product-page/${toUrlSlug(product.url)}`}
+                onClick={() => getProductData(product)}
+              >
                 <Text fw={1000} size="md" lineClamp={2} ta="left" ml={8} mt={5}>
-                  {checkTitleLength(product.title)}
+                  {limitTitleLength(product.title, 4, 4)}
                 </Text>
                 <Text fw={1000} size="md" lineClamp={2} ta="left" ml={8} mb={5}>
                   ${product.price}
                 </Text>
-              </Flex>
+              </Link>
             </Flex>
-          </Box>
-        </Link>
 
-        <Button
-          h="100%"
-          mt="auto"
-          radius="xs"
-          style={{
-            position: "absolute",
-            right: 10,
-            bottom: 10,
-            backgroundColor: theme.colors.gray[5],
-          }}
-          onClick={handleAddClick}
-        >
-          +
-        </Button>
+            <Button
+              h="100%"
+              mt="auto"
+              radius="xs"
+              style={{
+                marginLeft: "auto",
+                backgroundColor: theme.colors.gray[5],
+              }}
+              onClick={handleAddClick}
+            >
+              +
+            </Button>
+          </Flex>
+        </Box>
       </Card>
     </Flex>
   );
