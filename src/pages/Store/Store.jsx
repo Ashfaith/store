@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Tile from "../../utils/Tile";
 import { Container, Grid, Skeleton, Flex, Center } from "@mantine/core";
 import styles from "./Store.module.css";

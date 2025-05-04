@@ -26,14 +26,10 @@ const Wrapper = ({ open, cartItems }) => {
                 Store
               </Link>
             </div>
-            <div>
-              <Link href="#" className={styles.noUnderline} to="cart">
-                Cart
-              </Link>
-            </div>
           </Flex>
 
           <Autocomplete
+            data={["Search coming soon!"]}
             mt={22}
             mr="xl"
             ml="auto"
