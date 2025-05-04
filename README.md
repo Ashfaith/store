@@ -1,4 +1,4 @@
-# React + Vite
+# Template store site
 
 Ecommerce page template with modern design features.
 Utilising Mantine for components.
