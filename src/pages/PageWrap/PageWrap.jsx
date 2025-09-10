@@ -1,6 +1,12 @@
-import { Link } from "react-router";
-import { Outlet } from "react-router";
-import { Container, Autocomplete, Flex, Center } from "@mantine/core";
+import { Outlet, Link } from "react-router";
+import {
+  Container,
+  Autocomplete,
+  Flex,
+  Center,
+  Box,
+  Text,
+} from "@mantine/core";
 import styles from "./PageWrap.module.css";
 import {
   IconSearch,
@@ -12,7 +18,7 @@ const Wrapper = ({ open, cartItems }) => {
   return (
     <Container m={0} p={0} fluid>
       <Center href="#" className={styles.header}>
-        <Flex pt={10} pb={10} ml={32} w="70%" direction="row">
+        <Flex pt={10} pb={10} w="70%" direction="row">
           <h2>_ThisStore</h2>
 
           <Flex ml={65} direction="row" gap="xl" m={28}>
@@ -55,6 +61,18 @@ const Wrapper = ({ open, cartItems }) => {
       <main>
         <Outlet />
       </main>
+
+      <Box component="footer" className={styles.footer} mt="xl" p="md">
+        <Flex justify="center" gap="xl" wrap="wrap">
+          <h5>About Us</h5>
+          <h5>Contact</h5>
+          <h5>Terms & Conditions</h5>
+          <h5>Privacy Policy</h5>
+        </Flex>
+        <Text align="center" mt="sm" size="sm" color="dimmed">
+          © {new Date().getFullYear()} _ThisStore. All rights reserved.
+        </Text>
+      </Box>
     </Container>
   );
 };

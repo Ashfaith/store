@@ -66,12 +66,27 @@ function App() {
             fontFamily: "Helvetica",
           }}
         >
-          {/* prettier-ignore */}
-          <Route path="/" element={<><Wrapper open={open} cartItems={cartItems}/><Cart opened={opened} onClose={close} cartItems={cartItems} setCartItems={setCartItems}/></>}>
-          <Route index element={<Home />} />
-          <Route path="store" element={<Store setCartItems={setCartItems}/>}/>
-          <Route path="product-page/:id" element={<ProductPage/>}/>
-        </Route>
+          <Route
+            path="/"
+            element={
+              <>
+                <Wrapper open={open} cartItems={cartItems} />
+                <Cart
+                  opened={opened}
+                  onClose={close}
+                  cartItems={cartItems}
+                  setCartItems={setCartItems}
+                />
+              </>
+            }
+          >
+            <Route index element={<Home />} />
+            <Route
+              path="store"
+              element={<Store setCartItems={setCartItems} />}
+            />
+            <Route path="product-page/:id" element={<ProductPage />} />
+          </Route>
         </Routes>
       </ShopContext.Provider>
     </MantineProvider>

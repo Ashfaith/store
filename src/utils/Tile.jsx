@@ -49,6 +49,7 @@ const Tile = ({ product, addItems }) => {
               <Link
                 to={`/product-page/${toUrlSlug(product.url)}`}
                 onClick={() => getProductData(product)}
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 <Text fw={1000} size="md" lineClamp={2} ta="left" ml={8} mt={5}>
                   {limitTitleLength(product.title, 4, 4)}

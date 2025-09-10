@@ -36,3 +36,40 @@ body {
 .tile {
   border: 2px solid green;
 }
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.grid-image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.grid-box {
+  border-radius: var(--mantine-radius-sm);
+  box-shadow: var(--mantine-shadow-sm);
+  border: 1px solid rgb(214, 213, 213);
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.square {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  justify-content: center;
+}
+
+.square > h5 {
+  padding: 0;
+}
